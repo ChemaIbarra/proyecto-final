@@ -1,1 +1,23 @@
-<p>metas-component works!</p>
+<h2>Metas</h2>
+
+<div>
+  <input [(ngModel)]="nuevoTitulo" placeholder="Nueva meta" />
+  <button (click)="agregar()">Agregar</button>
+</div>
+
+<ul>
+  <li *ngFor="let m of metas">
+    <div>
+      <strong>{{ m.titulo }}</strong>
+      <div>{{ m.progreso }} / {{ m.meta }}</div>
+    </div>
+
+    <div>
+      <button (click)="sumar(m.id)" [disabled]="m.progreso >= m.meta">+1</button>
+      <button *ngIf="m.progreso >= m.meta" (click)="reiniciar(m.id)">Reiniciar</button>
+      <button (click)="eliminar(m.id)">Eliminar</button>
+    </div>
+  </li>
+</ul>
+
+<p *ngIf="metas.length === 0">No tienes metas aún.</p>
